@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Details</title>
+</head>
+<body>
+  <%- include("partials/navbar"); %>
+  <div id="blog">
+    <img id="img" src="<%= singleBlog.image %>" alt="Blog Image">
+    <h3 id="title"><%= singleBlog.title %></h3>
+    <span id="category">Category: <%= singleBlog.category %></span>
+    <p id="content"><%= singleBlog.content %></p>
+    <button id="like">Like</button>
+    <span id="count">Likes: <%= singleBlog.likedBy.length %></span>
+
+    <h4>Comments</h4>
+    <ul>
+      <% singleBlog.comments.forEach(comment => { %>
+        <li><%= comment.username %>: <%= comment.text %></li>
+      <% }); %>
+    </ul>
+
+    <form id="comment" method="POST" action="/blog/comment/<%= singleBlog._id %>">
+      <label for="text">Add Comment:</label>
+      <input type="text" id="text" name="text">
+      <button type="submit">Add Comment</button>
+    </form>
+  </div>
+  <%- include("partials/footer"); %>
+</body>
+</html>
